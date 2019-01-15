@@ -1,0 +1,31 @@
+/* Full-width input fields */
+input[type=text] {
+    width: 100%;
+    padding: 0px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+.container label {
+    display: table;
+    font-size:18px;
+    color: #adb5bd;
+}
+b {
+    color:#878c8e;
+}
+.submitBtn {
+    background-color: #521159;
+    width: 50%;
+    outline: none;
+    border: none;
+}
+#btnDropdownDemo {
+    border: 1px solid #ccc;
+    width: 100%;
+    text-align: left;
+}
+.dropdown-menu.show {
+    width:100%;
+}
