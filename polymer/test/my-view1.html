@@ -10,34 +10,94 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>my-view1</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+  <title>my-view1</title>
 
-    <!-- Import the element to test -->
-    <script type="module" src="../src/my-view1.js"></script>
-  </head>
-  <body>
-    <test-fixture id="BasicView">
-      <template>
-        <my-view1></my-view1>
-      </template>
-    </test-fixture>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
-    <script type="module">
-      suite('my-view1 tests', function() {
-        test('Number in circle should be 1', function() {
-          var myView = fixture('BasicView');
-          var circle = myView.shadowRoot.querySelector('.circle');
+  <!-- Import the element to test -->
+  <script type="module" src="../src/my-view1.js"></script>
+</head>
 
-          assert.equal(circle.textContent, '1');
+<body>
+  <test-fixture id="BasicView">
+    <template>
+      <my-view1></my-view1>
+    </template>
+  </test-fixture>
+  <test-fixture id="post">
+    <template>
+      <iron-ajax method="POST" url="/respond-to-post"></iron-ajax>
+    </template>
+  </test-fixture>
+
+  <script type="module">
+    suite('my-view1 tests', function () {
+      var myView;
+
+      setup(function () {
+        myView = fixture('BasicView');
+      });
+      test('Header should be "Account opening form"', function () {
+        var header = myView.shadowRoot.querySelector('header');
+        assert.equal(header.textContent, 'Account Opening Form');
+      });
+
+      suite('check for radio buttons', function () {
+        var totalRadioButtons;
+        test('two radio buttons should be present on the form', function () {
+          totalRadioButtons = myView.shadowRoot.querySelectorAll('paper-radio-button');
+          assert.equal(totalRadioButtons.length, 2);
+        });
+        test('text associated with radio button should be male and female', function () {
+          var totalRadioButtons = myView.shadowRoot.querySelectorAll('paper-radio-button');
+          var radioValues = [];
+          for (var radioButton of totalRadioButtons) {
+            radioValues.push(radioButton.textContent);
+          }
+          var radioButtonValues = ['Male', 'Female']
+          expect(radioValues).to.deep.equal(radioButtonValues);
         });
       });
-    </script>
-  </body>
+    });
+
+    suite('my-view1 ajax tests', function () {
+      var testElement;
+      var server;
+      var responseHeaders = {
+        json: { 'Content-Type': 'application/json' },
+        plain: { 'Content-Type': 'text/plain' }
+      };
+      var request;
+      var ajax;
+      setup(function () {
+        server = sinon.fakeServer.create();
+        server.respondWith('POST', '/respond-to-post', [
+          200,
+          responseHeaders.json,
+          '{"post_success": true}']);
+
+      });
+      teardown(function () {
+        server.restore();
+      });
+      suite('ajax test suite', function () {
+        setup(function () {
+          ajax = fixture('post');
+        });
+
+        test('should be a POST request', function () {
+          request = ajax.generateRequest();
+          expect(request.xhr.method).to.equal('POST');
+        });
+      });
+    });
+  </script>
+</body>
+
 </html>
