@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core/styles';
-import {TextField, MenuItem, Select} from '@material-ui/core/';
-// import TextField from '@material-ui/core/TextField';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import 
+import { TextField, MenuItem, Select, RadioGroup, Radio, Checkbox, FormControlLabel, Card, CardContent } from '@material-ui/core/';
 
+const styles = {
+    nationality: {
+        width: '100px'
+    }
+};
 class TestForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { fName: '', lName: '', nationality: '' };
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = { firstName: '', lastName: '', nationality: '', gender: '', tandc: '' };
     }
 
-    // state = { fName: '' };
-
     handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
+        console.log(name, event);
+        if (name === 'tandc') {
+            this.setState({
+                [name]: event.target.checked,
+            });
+        } else {
+            this.setState({
+                [name]: event.target.value,
+            });
+        }
+
         console.log(this.state);
     };
 
@@ -33,50 +39,75 @@ class TestForm extends Component {
         const { classes } = this.props;
         return (
             <form onSubmit={this.handleSubmit}>
-                {/* <label>
-                    Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange}></input>
-                </label> */}
                 <div>
-                    <TextField
-                        id="fName"
-                        label="First Name"
-                        className="fName"
-                        name="fName"
-                        value={this.state.fName}
-                        onChange={this.handleChange('fName')}
-                        margin="normal"
-                    />
+                    <Card>
+                        <CardContent>
+                            <div>
+                                <RadioGroup value={this.state.gender}
+                                    onChange={this.handleChange('gender')}
+                                >
+                                    <span>
+                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                    </span>
+                                </RadioGroup>
+                            </div>
+                            <div id="firstName">
+                                <TextField
+                                    id="fName"
+                                    label="First Name"
+                                    className="fName"
+                                    name="fName"
+                                    value={this.state.fName}
+                                    onChange={this.handleChange('firstName')}
+                                    margin="normal"
+                                />
+                            </div>
+                            <div id="lastName">
+                                <TextField
+                                    id="lName"
+                                    label="Last Name"
+                                    className="lName"
+                                    name="lName"
+                                    value={this.state.lName}
+                                    onChange={this.handleChange('lastName')}
+                                    margin="normal"
+                                />
+                            </div>
+                            <div id="nationality">
+                                <Select
+                                    value={this.state.nationality}
+                                    onChange={this.handleChange('nationality')}
+                                    style={{width:'195px'}}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={'Indian'}>Indian</MenuItem>
+                                    <MenuItem value={'Australian'}>Australian</MenuItem>
+                                    <MenuItem value={'Dutch'}>Dutch</MenuItem>
+                                </Select>
+                            </div>
+
+                            <div id="tandc">
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={this.state.tandc}
+                                            label={"Accept terms and conditions"}
+                                            onChange={this.handleChange('tandc')}
+                                            value="tandc"
+                                        />
+                                    }
+                                    label="Accept terms and conditions" />
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
-                <div>
-                    <TextField
-                        id="lName"
-                        label="Last Name"
-                        className="lName"
-                        name="lName"
-                        value={this.state.lName}
-                        onChange={this.handleChange('lName')}
-                        margin="normal"
-                    />
-                </div>
-                <div>
-                    <Select
-                        value={this.state.nationality}
-                        onChange={this.handleChange('nationality')}
-                        name="nationality"
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={'Indian'}>Indian</MenuItem>
-                        <MenuItem value={'Australian'}>Australian</MenuItem>
-                        <MenuItem value={'Dutch'}>Dutch</MenuItem>
-                    </Select>
-                </div>
-                {/* <input type="submit" value="Submit"></input> */}
             </form>
         )
     }
 }
 
+// export default withStyles(styles) (TestForm);
 export default TestForm;
