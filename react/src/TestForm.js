@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, MenuItem, Select, RadioGroup, Radio, Checkbox, FormControlLabel, Card, CardContent } from '@material-ui/core/';
+import { TextField, MenuItem, Select, RadioGroup, Radio, Checkbox, FormControlLabel, Card, CardContent, Button } from '@material-ui/core/';
+// import RaisedButton from '@material-ui/RaisedButton';
 
 const styles = {
     nationality: {
@@ -8,13 +9,15 @@ const styles = {
     }
 };
 class TestForm extends Component {
+    
     constructor(props) {
         super(props);
         this.state = { firstName: '', lastName: '', nationality: '', gender: '', tandc: '' };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = name => event => {
-        console.log(name, event);
+        // console.log(name, event);
         if (name === 'tandc') {
             this.setState({
                 [name]: event.target.checked,
@@ -25,13 +28,17 @@ class TestForm extends Component {
             });
         }
 
-        console.log(this.state);
+        // console.log(this.state);
     };
 
     handleSubmit(event) {
         console.log(event);
-        console.log(this.state);
-        alert('A name was submitted:' + this.state.value);
+        // console.log(this.props);
+        alert('A name was submitted:' + JSON.stringify(this.state));
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify(this.state)
+        })
         event.preventDefault();
     }
 
@@ -101,9 +108,12 @@ class TestForm extends Component {
                                     }
                                     label="Accept terms and conditions" />
                             </div>
+                            <input type="submit" value="Submit" />
+                            {/* <Button label="Submit" type="submit" color="primary" onClick={this.handleSubmit}>Submit</Button> */}
                         </CardContent>
                     </Card>
                 </div>
+                
             </form>
         )
     }
