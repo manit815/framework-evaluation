@@ -35,3 +35,7 @@
     transform: rotate(360deg);
   }
 }
+
+#genderRadioBtns {  
+  display: inline-block;
+}
