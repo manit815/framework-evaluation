@@ -6,8 +6,12 @@ import TestApp from './TestApp';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import * as serviceWorker from './serviceWorker';
+//import './polymer-components/msg.html';
+
 
 ReactDOM.render(<TestApp />, document.getElementById('root'));
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

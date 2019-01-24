@@ -26,6 +26,13 @@
 .App-link {
   color: #61dafb;
 }
+#address{
+  width:23% !important;
+}
+#submitBtn{
+  background-color: #3f51b5;
+  color: #fff;
+}
 
 @keyframes App-logo-spin {
   from {

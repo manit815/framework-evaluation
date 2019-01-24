@@ -66,3 +66,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Integrate polymer web components with react app
+Reference
+https://medium.com/jens-jansson/start-using-web-components-in-react-6ccca2ca21f9
