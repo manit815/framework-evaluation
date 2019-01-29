@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+
+    <div>
+      <h2 class="section-title">Account details</h2>
+     
+      <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmitUserDetails(userDetailsForm.value)">
+        
+
+        <mat-radio-group class="full-width" formControlName="gender">
+          <mat-radio-button value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+          <mat-radio-button value="Others">Others</mat-radio-button>
+        </mat-radio-group>
+
+         <mat-form-field class="full-width">
+          <input matInput placeholder="First Name" formControlName="firstname" required>
+        </mat-form-field> 
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Last Name" formControlName="lastname" required>
+        </mat-form-field>
+
+        <vaadin-date-picker class="full-width" ngDefaultControl label="Birthday" formControlName="birthday" on-change="datepicker($event)" id="dob">
+        </vaadin-date-picker>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Nationality">
+            <mat-option *ngFor="let national of nationality" [value]="national">
+              {{ national }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="full-width">
+          <textarea matInput maxlength="256" placeholder="Address" formControlName="address" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+          <mat-hint align="end">{{userDetailsForm.get('address').value.length}} / 256</mat-hint>
+        </mat-form-field>
+
+        
+        <mat-checkbox formControlName="terms" class="full-width">
+          I accept terms and conditions
+        </mat-checkbox>
+
+
+        <button class="submit-btn full-width" color="primary" mat-raised-button type="submit">
+          Submit
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

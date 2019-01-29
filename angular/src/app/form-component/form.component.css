@@ -1,0 +1,52 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+  .container {
+    margin-top: 50px;
+  }
+
+  .section-title {
+    margin-bottom: 20px;
+  }
+
+  .user-details-container {
+    padding: 20px;
+    text-align: center;
+
+  }
+  .user-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 30px;
+    display: block;
+  }
+
+  .user-bio {
+    font-size: 12px;
+    margin-top: 20px;
+    display: block;
+    color: rgba(0, 0, 0, 0.70);
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .mat-input-hint-wrapper {
+      flex-wrap: wrap;
+    
+  }
+
+  .submit-btn {
+    margin-top: 20px !important;
+  }
+
+  mat-radio-group{
+    margin-bottom: 20px !important;
+    display: block;
+  }
+  
+  mat-radio-button{
+    margin-left:10px;
+  }
+
+ 
