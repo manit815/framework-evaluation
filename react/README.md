@@ -70,3 +70,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### Integrate polymer web components with react app
 Reference
 https://medium.com/jens-jansson/start-using-web-components-in-react-6ccca2ca21f9
+
+### Build deploy to firebase
+https://kaloraat.com/articles/how-to-deploy-create-react-app-to-firebase
