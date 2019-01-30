@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import {PolymerElement, html} from '@polymer/polymer';
 import PaperInputElement from '@polymer/paper-input/paper-input.js';
 import '@vaadin/vaadin-date-picker';
+import { shallow } from './enzyme.js';
 
 const styles = {
     nationality: {
@@ -59,7 +60,12 @@ class TestForm extends Component {
         }
     };
 
-    handleSubmit(event) {           
+    handleSubmit(event) {     
+        
+        
+        const wrapper = shallow(<TestForm />);
+        console.log('helo',wrapper.find('Toolbar'));
+
         var dob = document.querySelector('#dob');     
         var address = document.querySelector('#address'); 
         
@@ -98,7 +104,7 @@ class TestForm extends Component {
         return (
             <div>
                 <AppBar position="static">
-                    <Toolbar>
+                    <Toolbar className="header">
                     Create an Account
                     </Toolbar>
                 </AppBar>
@@ -164,7 +170,7 @@ class TestForm extends Component {
                                                     style={{width:'195px',marginTop:'20px'}}                                    
                                                 >
                                                     {nationalityArr.map(option => (
-                                                        <MenuItem key={option.value} value={option.value}>
+                                                        <MenuItem className="item" key={option.value} value={option.value}>
                                                             <em>{option.label}</em>
                                                         </MenuItem>
                                                     ))}                                   
@@ -193,7 +199,7 @@ class TestForm extends Component {
                                         label="Accept terms and conditions" />
                                 </div>
                                 <Button type="submit" id="submitBtn" value="Submit" variant="contained">
-                                    Default
+                                    Submit
                                 </Button>                                                        
                             </CardContent>
                         </Card>
